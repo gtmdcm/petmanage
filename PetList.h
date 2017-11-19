@@ -264,7 +264,7 @@ void PetList::ModifyPetPrice(PetListNode* &Temp, int Num)
 		string cacu;
 		cin >> cacu;
 		convert2RPN(cacu);
-		Temp->price = stoi(cacu);
+		Temp->price = calculateRPN(cacu);
 		cout << "修改成功！" << endl;
 	}
 	else
@@ -291,7 +291,7 @@ void PetList::ModifyPetDay(PetListNode* &Temp, int Num)
 		string cacu;
 		cin >> cacu;
 		convert2RPN(cacu);
-		Temp->day = stoi(cacu);
+		Temp->day = calculateRPN(cacu);
 		cout << "修改成功！" << endl;
 	}
 	else
