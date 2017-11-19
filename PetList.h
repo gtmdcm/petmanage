@@ -3,6 +3,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include"RPN.h"
 using namespace std;
 #define INF 0x3f3f3f
 fstream file("temp\\PetList_100.txt");
@@ -42,17 +43,17 @@ private:
 	bool NumExist(PetListNode*, int);
 public:
 	PetListNode head, tail;
-	void PrintFile();                 //±£´æËùÓĞ³èÎïĞÅÏ¢£¬ÒÔÎÄ¼şÊä³ö
-	void PrintFiletemp();             //ÁÙÊ±´òÓ¡ÒÔ²éÑ¯È«²¿³èÎïĞÅÏ¢
-	void Input();                     //ÊäÈë³õÊ¼ÎÄ¼ş£¬Ê¹ÓÃÎÄ¼ş¶ÁÈë        
-	void Delete(int);                 //É¾³ı±àºÅÎª(int)µÄ³èÎï
-	void NameDelete(string);          //É¾³ıÃû×ÖÎª(string)µÄ³èÎï
-	void ModifyPetPrice(int);         //ĞŞ¸Ä±àºÅÎª(int)µÄ³èÎï¼Û¸ñ               
-	void ModifyPetDay(int);           //ĞŞ¸Ä±àºÅÎª(int)µÄ³èÎïÌìÊı              
-	string AddInfo(int);              //Ìí¼Ó±àºÅÎª(int)µÄ³èÎï£¬·µ»ØÖ÷ÈË±àºÅ                                 
-	string SearchNum(int);            //²éÕÒ±àºÅÎª(int)µÄ³èÎï£¬·µ»ØÖ÷ÈË±àºÅ               
-	string SearchPetName(string);	  //²éÕÒÃû×ÖÎª(string)µÄ³èÎï£¬·µ»ØÖ÷ÈË±àºÅ                                                   
-	bool NumExist(int);               //¼ì²é±àºÅÎª(int)µÄ³èÎïÊÇ·ñ´æÔÚ             
+	void PrintFile();                 //ä¿å­˜æ‰€æœ‰å® ç‰©ä¿¡æ¯ï¼Œä»¥æ–‡ä»¶è¾“å‡º
+	void PrintFiletemp();             //ä¸´æ—¶æ‰“å°ä»¥æŸ¥è¯¢å…¨éƒ¨å® ç‰©ä¿¡æ¯
+	void Input();                     //è¾“å…¥åˆå§‹æ–‡ä»¶ï¼Œä½¿ç”¨æ–‡ä»¶è¯»å…¥        
+	void Delete(int);                 //åˆ é™¤ç¼–å·ä¸º(int)çš„å® ç‰©
+	void NameDelete(string);          //åˆ é™¤åå­—ä¸º(string)çš„å® ç‰©
+	void ModifyPetPrice(int);         //ä¿®æ”¹ç¼–å·ä¸º(int)çš„å® ç‰©ä»·æ ¼               
+	void ModifyPetDay(int);           //ä¿®æ”¹ç¼–å·ä¸º(int)çš„å® ç‰©å¤©æ•°              
+	string AddInfo(int);              //æ·»åŠ ç¼–å·ä¸º(int)çš„å® ç‰©ï¼Œè¿”å›ä¸»äººç¼–å·                                 
+	string SearchNum(int);            //æŸ¥æ‰¾ç¼–å·ä¸º(int)çš„å® ç‰©ï¼Œè¿”å›ä¸»äººç¼–å·               
+	string SearchPetName(string);	  //æŸ¥æ‰¾åå­—ä¸º(string)çš„å® ç‰©ï¼Œè¿”å›ä¸»äººç¼–å·                                                   
+	bool NumExist(int);               //æ£€æŸ¥ç¼–å·ä¸º(int)çš„å® ç‰©æ˜¯å¦å­˜åœ¨             
 	PetList()
 	{
 		head.masterNumber = "head";
@@ -152,14 +153,14 @@ void PetList::Delete(PetListNode* &Temp, int Num)
 {
 	if (Temp == &tail)
 	{
-		cout << "´Ë³èÎï²»´æÔÚ£¡" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨ï¼" << endl;
 		return;
 	}
 	if (Temp->petNumber == Num)
 	{
 		Temp->next->previous = Temp->previous;
 		Temp->previous->next = Temp->next;
-		cout << "É¾³ı³É¹¦£¡" << endl;
+		cout << "åˆ é™¤æˆåŠŸï¼" << endl;
 	}
 	else
 	{
@@ -176,14 +177,14 @@ void PetList::NameDelete(PetListNode* &Temp, string Name)
 {
 	if (Temp == &tail)
 	{
-		cout << "´Ë³èÎï²»´æÔÚ£¡" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨ï¼" << endl;
 		return;
 	}
 	if (Temp->petName == Name)
 	{
 		Temp->next->previous = Temp->previous;
 		Temp->previous->next = Temp->next;
-		cout << "É¾³ı³É¹¦£¡" << endl;
+		cout << "åˆ é™¤æˆåŠŸï¼" << endl;
 	}
 	else
 	{
@@ -201,7 +202,7 @@ string PetList::SearchNum(PetListNode* Temp, int Num)
 	if (Temp == &tail)
 	{
 		string Tempstr = "-1";
-		cout << "´Ë³èÎï²»´æÔÚ£¡" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨ï¼" << endl;
 		return Tempstr;
 	}
 	if (Temp->petNumber == Num)
@@ -228,7 +229,7 @@ string PetList::SearchPetName(PetListNode* Temp, string Name)
 	if (Temp == &tail)
 	{
 		string Tempstr = "-1";
-		cout << "´Ë³èÎï²»´æÔÚ" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨" << endl;
 		return Tempstr;
 	}
 	if (Temp->petName == Name)
@@ -254,14 +255,17 @@ void PetList::ModifyPetPrice(PetListNode* &Temp, int Num)
 {
 	if (Temp == &tail)
 	{
-		cout << "´Ë³èÎï²»´æÔÚ£¡" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨ï¼" << endl;
 		return;
 	}
 	if (Temp->petNumber == Num)
 	{
-		cout << "ÇëÊäÈëĞÂµÄ¼Û¸ñ£º" << endl;
-		cin >> Temp->price;
-		cout << "ĞŞ¸Ä³É¹¦£¡" << endl;
+		cout << "è¯·è¾“å…¥æ–°çš„ä»·æ ¼(æ”¯æŒå››åˆ™è¿ç®—å½¢å¼è¾“å…¥)ï¼š" << endl;
+		string cacu;
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->price = stoi(cacu);
+		cout << "ä¿®æ”¹æˆåŠŸï¼" << endl;
 	}
 	else
 	{
@@ -278,14 +282,17 @@ void PetList::ModifyPetDay(PetListNode* &Temp, int Num)
 {
 	if (Temp == &tail)
 	{
-		cout << "´Ë³èÎï²»´æÔÚ£¡" << endl;
+		cout << "æ­¤å® ç‰©ä¸å­˜åœ¨ï¼" << endl;
 		return;
 	}
 	if (Temp->petNumber == Num)
 	{
-		cout << "ÇëÊäÈëĞÂµÄ¼ÄÑøÌìÊı£º" << endl;
-		cin >> Temp->day;
-		cout << "ĞŞ¸Ä³É¹¦£¡" << endl;
+		cout << "è¯·è¾“å…¥æ–°çš„å¯„å…»å¤©æ•°(æ”¯æŒå››åˆ™è¿ç®—å½¢å¼è¾“å…¥)ï¼š" << endl;
+		string cacu;
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->day = stoi(cacu);
+		cout << "ä¿®æ”¹æˆåŠŸï¼" << endl;
 	}
 	else
 	{
