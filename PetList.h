@@ -3,6 +3,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include"RPN.h"
 using namespace std;
 #define INF 0x3f3f3f
 fstream file("temp\\PetList_100.txt");
@@ -260,7 +261,10 @@ void PetList::ModifyPetPrice(PetListNode* &Temp, int Num)
 	if (Temp->petNumber == Num)
 	{
 		cout << "请输入新的价格：" << endl;
-		cin >> Temp->price;
+		string cacu;
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->price = calculateRPN(cacu);
 		cout << "修改成功！" << endl;
 	}
 	else
@@ -284,7 +288,10 @@ void PetList::ModifyPetDay(PetListNode* &Temp, int Num)
 	if (Temp->petNumber == Num)
 	{
 		cout << "请输入新的寄养天数：" << endl;
-		cin >> Temp->day;
+		string cacu;
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->day = calculateRPN(cacu);
 		cout << "修改成功！" << endl;
 	}
 	else
@@ -311,8 +318,13 @@ string PetList::AddInfo(PetListNode* &Temp, int Num)
 		cin >> Temp->next->petName;
 		cin >> Temp->next->petBreed;
 		cin >> Temp->next->masterNumber;
-		cin >> Temp->next->day;
-		cin >> Temp->next->price;
+		string cacu;
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->next->day = calculateRPN(cacu);
+		cin >> cacu;
+		convert2RPN(cacu);
+		Temp->next->price=calculateRPN(cacu);
 		return Temp->next->masterNumber;
 	}
 	else
